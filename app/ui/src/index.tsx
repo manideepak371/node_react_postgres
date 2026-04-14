@@ -42,3 +42,24 @@ ReactDom.createRoot(root).render(
         </Provider>
     </>
 )
+
+
+
+
+
+
+
+
+
+
+// Stage 1 (you are here)
+        // Monorepo
+        // Backend serves UI
+        // Simple Jenkins pipeline
+// Stage 2
+        // Split UI → CDN
+        // Backend → API
+        // Separate pipelines
+// Stage 3
+        // Microservices + org-level Jenkins
+        // Organization Folder

@@ -10,11 +10,13 @@ app.use((req, res, next) => {
 })
 
 app.use("/api/name",(req,res) => {
-    res.json({name: "deepak", path: path.join(__dirname, "..","ui","build")});
+    res.json({name: "deepak" });
 })
 
-const uiBuildPath = path.join(__dirname, "..","ui","build")
+const uiBuildPath = path.join(__dirname, "public")
 
 app.use(express.static(uiBuildPath));
 
-app.listen(3100, () => console.log("server started..."))
+const port = Process.env.PORT || 7000
+
+app.listen(port, () => console.log("server started..."))
