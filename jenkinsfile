@@ -1,0 +1,12 @@
+pipeline{
+    agent any
+    stages{
+        stage('build backend image that also comes with UI'){
+            sh "docker build -t backend_with_ui:latest -f /server/Dockerfile ."
+        }
+
+        stage('deploy'){
+            sh 'docker run -d -p 7000:7000 --name node_react_postgres backend_with_ui:latest'
+        }
+    }
+}
