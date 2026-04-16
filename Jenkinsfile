@@ -7,16 +7,30 @@ pipeline{
     stages {
         stage('build backend image that also comes with UI'){
             steps{
-                sh "docker build -t $IMAGE_NAME:$TAG -f /server/Dockerfile ."
+                sh "docker build -t $IMAGE_NAME:$TAG -f server/Dockerfile ."
             }
         }
 
         stage('login to docker hub'){
-            
+            steps{
+                withCredentials([usernamePassword(
+                    credentialsId: 'docker_hub_dev',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+                    sh """
+                    echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+                    """
+                }
+            }
         }
 
         stage('push image to docker hub'){
-
+            steps{
+                sh """
+                docker push $IMAGE_NAME:$TAG
+                """
+            }
         }
 
         // stage('deploy'){
