@@ -1,11 +1,11 @@
 # ui
-From node:18 AS build
+From node:22 AS build
 WORKDIR /ui
 COPY ../ui .
 RUN npm install && npm run build
 
 #build backend
-From node:18
+From node:22
 WORKDIR /server
 COPY --from=build /ui/dist ./public
 RUN npm install
